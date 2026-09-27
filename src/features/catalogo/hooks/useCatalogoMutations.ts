@@ -24,8 +24,10 @@ export function useCatalogoMutations() {
       onError,
     }),
     toggleEspecialidad: useMutation({
-      mutationFn: ({ id, activa }: { id: number; activa: boolean }) =>
-        activa ? especialidadesApi.desactivar(id) : especialidadesApi.activar(id),
+      mutationFn: async ({ id, activa }: { id: number; activa: boolean }): Promise<void> => {
+        if (activa) await especialidadesApi.desactivar(id);
+        else await especialidadesApi.activar(id);
+      },
       onSuccess: onSuccess('Estado de la especialidad actualizado'),
       onError,
     }),

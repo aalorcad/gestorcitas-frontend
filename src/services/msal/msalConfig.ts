@@ -4,16 +4,29 @@ import { API_BASE_URL, POST_LOGOUT_REDIRECT_URI, REDIRECT_URI } from '../config'
 const env = import.meta.env;
 
 /**
+ * Authority:
+ *  - Tenant workforce (empresa): https://login.microsoftonline.com/<Tenant ID>  (por defecto)
+ *  - Entra External ID (clientes, con autoregistro): https://<subdominio>.ciamlogin.com/
+ *    se define en VITE_ENTRA_AUTHORITY y se declara como knownAuthority.
+ */
+const authority = env.VITE_ENTRA_AUTHORITY || `https://login.microsoftonline.com/${env.VITE_ENTRA_TENANT_ID}`;
+const knownAuthorities = env.VITE_ENTRA_AUTHORITY ? [new URL(env.VITE_ENTRA_AUTHORITY).host] : [];
+
+/** true cuando el tenant permite que el usuario cree su propia cuenta (External ID). */
+export const signUpEnabled = env.VITE_ENTRA_SIGNUP === 'true';
+
+/**
  * Configuración MSAL (App Registration del FRONTEND tipo SPA).
  *  - Client ID  : Application (client) ID de la SPA
- *  - Authority  : https://login.microsoftonline.com/<Tenant ID>
+ *  - Authority  : ver arriba (workforce o External ID)
  *  - Redirect URI: debe estar registrada como plataforma "Single-page application"
  *    (por defecto el origen actual: http://localhost:5173 en desarrollo o la URL de API Gateway en AWS)
  */
 export const msalConfig: Configuration = {
   auth: {
     clientId: env.VITE_ENTRA_CLIENT_ID,
-    authority: `https://login.microsoftonline.com/${env.VITE_ENTRA_TENANT_ID}`,
+    authority,
+    knownAuthorities,
     redirectUri: REDIRECT_URI,
     postLogoutRedirectUri: POST_LOGOUT_REDIRECT_URI,
     navigateToLoginRequestUrl: true,
@@ -40,6 +53,12 @@ export const apiScopes: string[] = [env.VITE_API_SCOPE];
 /** Se pide el scope de la API desde el login para obtener el consentimiento de una vez. */
 export const loginRequest: RedirectRequest = {
   scopes: ['openid', 'profile', 'email', ...apiScopes],
+};
+
+/** Registro (External ID): abre directamente la pantalla "Crear cuenta" del flujo de usuario. */
+export const signUpRequest: RedirectRequest = {
+  ...loginRequest,
+  prompt: 'create',
 };
 
 /**

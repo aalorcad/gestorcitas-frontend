@@ -3,6 +3,7 @@ export { AuthGuard } from './components/AuthGuard';
 export { RoleGuard } from './components/RoleGuard';
 export { RequireRole } from './components/RequireRole';
 export { LoginCard } from './components/LoginCard';
+export { RegistroCard } from './components/RegistroCard';
 export { UserMenu } from './components/UserMenu';
 export { PerfilCard } from './components/PerfilCard';
 export { useAuth } from './hooks/useAuth';

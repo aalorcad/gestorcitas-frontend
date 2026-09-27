@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { InteractionStatus } from '@azure/msal-browser';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
-import { loginRequest } from '@/services';
+import { loginRequest, signUpRequest } from '@/services';
 import { useAuthStore } from '@/stores';
 import type { AppRole } from '@/types';
 import type { AuthUser } from '../types';
@@ -27,6 +27,7 @@ export function useAuth() {
   );
 
   const login = useCallback(() => instance.loginRedirect(loginRequest), [instance]);
+  const signUp = useCallback(() => instance.loginRedirect(signUpRequest), [instance]);
 
   const logout = useCallback(() => {
     reset();
@@ -43,6 +44,7 @@ export function useAuth() {
     rolesLoaded,
     hasRole,
     login,
+    signUp,
     logout,
   };
 }

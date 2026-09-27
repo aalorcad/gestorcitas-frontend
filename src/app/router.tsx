@@ -6,6 +6,7 @@ import { MainLayout } from './layouts/MainLayout';
 import { HomeRedirect } from './routes/HomeRedirect';
 import { LoginPage } from './routes/LoginPage';
 import { NotFoundPage } from './routes/NotFoundPage';
+import { RegistroPage } from './routes/RegistroPage';
 import { SesionPage } from './routes/SesionPage';
 import { UnauthorizedPage } from './routes/UnauthorizedPage';
 import { PacienteHomePage } from './routes/paciente/PacienteHomePage';
@@ -22,6 +23,7 @@ import { CitasAdminPage } from './routes/admin/CitasAdminPage';
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
+  { path: '/registro', element: <RegistroPage /> },
   {
     // Guard 1: sesión iniciada en Entra ID
     element: <AuthGuard />,

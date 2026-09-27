@@ -7,6 +7,7 @@ import { decodeJwtPayload } from '@/utils';
 import type { ApiAccessTokenClaims } from '../types';
 
 const ROLES_VALIDOS = Object.values(AppRole) as string[];
+const ROL_POR_DEFECTO = import.meta.env.VITE_DEFAULT_ROLE;
 
 /**
  * Tras el login obtiene el access token de la API y extrae el claim "roles"
@@ -27,7 +28,11 @@ export function useRolesSync(): void {
     acquireApiToken()
       .then((token) => {
         const claims = decodeJwtPayload<ApiAccessTokenClaims>(token);
-        const roles = (claims?.roles ?? []).filter((r): r is AppRole => ROLES_VALIDOS.includes(r));
+        let roles = (claims?.roles ?? []).filter((r): r is AppRole => ROLES_VALIDOS.includes(r));
+        // Autoregistro (External ID): sin App Roles asignados -> rol por defecto (igual que el BFF)
+        if (roles.length === 0 && ROL_POR_DEFECTO && ROLES_VALIDOS.includes(ROL_POR_DEFECTO)) {
+          roles = [ROL_POR_DEFECTO as AppRole];
+        }
         if (!cancelled) setRoles(roles);
       })
       .catch(() => {
