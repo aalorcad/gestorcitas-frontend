@@ -1,0 +1,22 @@
+# =====================================================================
+# EC2-C  gestorcitas-front
+# Construye React (Vite) y lo sirve con nginx en el puerto 80.
+# API Gateway publica este nginx por HTTPS:  GET /  y  GET /{proxy+}
+# Los valores VITE_* se leen del archivo .env de esta carpeta (copiado con scp).
+#
+#   docker compose up -d --build
+# =====================================================================
+services:
+  frontend:
+    build:
+      context: .
+      args:
+        VITE_ENTRA_CLIENT_ID: ${VITE_ENTRA_CLIENT_ID:?Define VITE_ENTRA_CLIENT_ID en .env}
+        VITE_ENTRA_TENANT_ID: ${VITE_ENTRA_TENANT_ID:?Define VITE_ENTRA_TENANT_ID en .env}
+        VITE_API_SCOPE: ${VITE_API_SCOPE:?Define VITE_API_SCOPE en .env}
+        # URL de API Gateway (el mismo dominio desde el que se sirve el frontend)
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-}
+    container_name: gestorcitas-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
