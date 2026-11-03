@@ -207,3 +207,7 @@ a.login-card__btn { display: inline-flex; justify-content: center; text-decorati
   .dl { grid-template-columns: 1fr; }
   .user-menu__info { display: none; }
 }
+
+/* Mensajería (administración RabbitMQ) */
+.checkbox { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.code-input { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }

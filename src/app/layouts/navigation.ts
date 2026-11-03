@@ -22,6 +22,7 @@ export const NAV_SECTIONS: NavSection[] = [
       { to: '/admin/usuarios', label: 'Usuarios' },
       { to: '/admin/catalogo', label: 'Especialidades' },
       { to: '/admin/citas', label: 'Citas' },
+      { to: '/admin/mensajeria', label: 'Mensajería' },
     ],
   },
   {

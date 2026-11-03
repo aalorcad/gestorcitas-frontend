@@ -20,6 +20,7 @@ import { AdminDashboardPage } from './routes/admin/AdminDashboardPage';
 import { UsuariosAdminPage } from './routes/admin/UsuariosAdminPage';
 import { CatalogoAdminPage } from './routes/admin/CatalogoAdminPage';
 import { CitasAdminPage } from './routes/admin/CitasAdminPage';
+import { MensajeriaAdminPage } from './routes/admin/MensajeriaAdminPage';
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
@@ -68,6 +69,7 @@ export const router = createBrowserRouter([
                   { path: 'usuarios', element: <UsuariosAdminPage /> },
                   { path: 'catalogo', element: <CatalogoAdminPage /> },
                   { path: 'citas', element: <CitasAdminPage /> },
+                  { path: 'mensajeria', element: <MensajeriaAdminPage /> },
                 ],
               },
             ],
