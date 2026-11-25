@@ -21,6 +21,8 @@ import { UsuariosAdminPage } from './routes/admin/UsuariosAdminPage';
 import { CatalogoAdminPage } from './routes/admin/CatalogoAdminPage';
 import { CitasAdminPage } from './routes/admin/CitasAdminPage';
 import { MensajeriaAdminPage } from './routes/admin/MensajeriaAdminPage';
+import { KafkaAdminPage } from './routes/admin/KafkaAdminPage';
+import { AnaliticaPage } from './routes/admin/AnaliticaPage';
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
@@ -70,6 +72,8 @@ export const router = createBrowserRouter([
                   { path: 'catalogo', element: <CatalogoAdminPage /> },
                   { path: 'citas', element: <CitasAdminPage /> },
                   { path: 'mensajeria', element: <MensajeriaAdminPage /> },
+                  { path: 'kafka', element: <KafkaAdminPage /> },
+                  { path: 'analitica', element: <AnaliticaPage /> },
                 ],
               },
             ],

@@ -23,6 +23,8 @@ export const NAV_SECTIONS: NavSection[] = [
       { to: '/admin/catalogo', label: 'Especialidades' },
       { to: '/admin/citas', label: 'Citas' },
       { to: '/admin/mensajeria', label: 'Mensajería' },
+      { to: '/admin/kafka', label: 'Streaming (Kafka)' },
+      { to: '/admin/analitica', label: 'Analítica' },
     ],
   },
   {
